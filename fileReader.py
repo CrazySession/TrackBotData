@@ -1,9 +1,17 @@
-# --- CSV File Reader ---
+#! python 3
+# --- JSON File Reader ---
 
-import csv
+import json, requests, sys, pprint
 
-dailyFile = open('E:/PythonProjects/TrackBotData/CSV_Files/14_08_2016.csv')
-fileReader = csv.reader(dailyFile)
-dailyData = list(fileReader)
+#Downloading Data from trackobot.com API
+url = 'https://trackobot.com/profile/history.json?username=dawn-nightblade-5831&token=HfGxFHW6hbK46NkBZW55'
+response = requests.get(url)
+response.raise_for_status()
 
-print(dailyData)
+#Load JSON
+gameStats = json.loads(response.text)
+
+
+print(gameStats)
+
+
