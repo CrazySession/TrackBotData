@@ -1,10 +1,19 @@
 #! python 3
 # --- JSON File Reader ---
 
-import json, requests, bs4
-# deleted sys and pprint
+import json, requests, bs4, os
 
+#init Var for pageNo
 no = 1
+
+#Change Dir to Save Folder / Create Save Folder
+currentDir = os.getcwd()
+
+try:
+    os.chdir(currentDir+'\\Saves')
+except FileNotFoundError:
+    os.makedirs('.\\Saves')
+    os.chdir(currentDir+'\\Saves')
 
 #Downloading Data from trackobot.com API
 while True:
@@ -15,15 +24,19 @@ while True:
 
     #Load JSON
     gameStats = json.loads(response.text)
+    
+    #Load / Create Excel Spreadsheet --- necessary in while loop cause if not same month! ------ except FileNotFoundError:
 
+    #Load / Create Sheet ---- necessary in while loop cause if not same day!
 
+    #Write JSON to Excel Spreadsheet
     w = gameStats['history']
 
     L = len(w)
 
     for i in range(L):
         print(w[i]['id'] , w[i]['mode'] , w[i]['hero'], w[i]['hero_deck'], w[i]['opponent'],
-          w[i]['opponent_deck'], w[i]['coin'], w[i]['result'],w[i]['rank'])
+          w[i]['opponent_deck'], w[i]['coin'], w[i]['result'],w[i]['rank'],w[i]['added'])
 
     no +=1
 
