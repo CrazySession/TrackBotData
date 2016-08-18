@@ -8,6 +8,10 @@ no = 1
 
 Aug = 'August' # temp Var for 2.3
 
+rowA = 1
+rowB = 1
+rowC = 1
+
 #1.0Change Dir to Save Folder / Create Save Folder
 currentDir = os.getcwd()
 
@@ -50,12 +54,45 @@ while True:
 
     L = len(w)
 
+    wb = openpyxl.load_workbook('August_2016.xlsx')
+    sheet = wb.get_sheet_by_name(Aug)
+
+    #iterate through dictionary
+
+    for i in range(L):
+        sheet['A'+str(rowA)] = w[i]['id']
+        rowA += 1          
+        #print(row)
+
+    for i in range(L):
+        sheet['B'+str(rowB)] = w[i]['mode']
+        rowB += 1
+        #print(row)
+
+    for i in range(L):
+        sheet['C'+str(rowC)] = w[i]['hero']
+        rowC += 1 
+        #print(row)
+    
+    wb.save('August_2016.xlsx')
+
+    #Set rows to first empty row
+    highestRow = sheet.get_highest_row()
+    highestRow +=1
+
+    rowA = highestRow
+    rowB = highestRow
+    rowC = highestRow
+
+    '''
     for i in range(L):
         print(w[i]['id'] , w[i]['mode'] , w[i]['hero'], w[i]['hero_deck'], w[i]['opponent'],
           w[i]['opponent_deck'], w[i]['coin'], w[i]['result'],w[i]['rank'],w[i]['added'])
-
+    '''
+    #Iterate the page count to check for next page on trackbot
     no +=1
 
+    #2.5Check next page if there is more content to dl otherwise stop searching
     checkURL = 'https://trackobot.com/profile/history?username=dawn-nightblade-5831&token=HfGxFHW6hbK46NkBZW55' + pageNo
     res = requests.get(checkURL)
     res.raise_for_status()
