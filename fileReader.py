@@ -18,7 +18,8 @@ rowG = 1
 rowH = 1
 rowI = 1
 rowJ = 1
-
+sheetRow = 1
+checkRow = 0 # row for check if dl is necessary 2.4
 
 #1.0Change Dir to Save Folder / Create Save Folder
 currentDir = os.getcwd()
@@ -65,11 +66,19 @@ while True:
     wb = openpyxl.load_workbook('August_2016.xlsx')
     sheet = wb.get_sheet_by_name(Aug)
 
+    currentID = sheet.cell(row = sheetRow, column = 1).value
+
+    if currentID == w[checkRow]['id']:
+        print('Now new games yet. Now need to update the spreadsheet!')
+        break
+    print(str(sheetRow)+ ' ' + str(checkRow))
+
     #iterate through dictionary
     for i in range(L):
         if (w[i]['mode'] == 'ranked'):
             sheet['A'+str(rowA)] = w[i]['id']
             rowA += 1
+            sheetRow += 1
 
     for i in range(L):
         if (w[i]['mode'] == 'ranked'):
@@ -125,6 +134,13 @@ while True:
     rowA = highestRow
     rowB = highestRow
     rowC = highestRow
+    rowD = highestRow
+    rowE = highestRow
+    rowF = highestRow
+    rowG = highestRow
+    rowH = highestRow
+    rowI = highestRow
+    rowJ = highestRow
 
     '''
     for i in range(L):
@@ -133,7 +149,7 @@ while True:
     '''
     #Iterate the page count to check for next page on trackbot
     no +=1
-
+    pageNo = '&page=' + str(no)
     #2.5Check next page if there is more content to dl otherwise stop searching
     checkURL = 'https://trackobot.com/profile/history?username=dawn-nightblade-5831&token=HfGxFHW6hbK46NkBZW55' + pageNo
     res = requests.get(checkURL)
