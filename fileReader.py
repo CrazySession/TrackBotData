@@ -11,6 +11,14 @@ Aug = 'August' # temp Var for 2.3
 rowA = 1
 rowB = 1
 rowC = 1
+rowD = 1
+rowE = 1
+rowF = 1
+rowG = 1
+rowH = 1
+rowI = 1
+rowJ = 1
+
 
 #1.0Change Dir to Save Folder / Create Save Folder
 currentDir = os.getcwd()
@@ -58,22 +66,56 @@ while True:
     sheet = wb.get_sheet_by_name(Aug)
 
     #iterate through dictionary
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['A'+str(rowA)] = w[i]['id']
+            rowA += 1
 
     for i in range(L):
-        sheet['A'+str(rowA)] = w[i]['id']
-        rowA += 1          
-        #print(row)
+        if (w[i]['mode'] == 'ranked'):
+            sheet['B'+str(rowB)] = w[i]['mode']
+            rowB += 1
 
     for i in range(L):
-        sheet['B'+str(rowB)] = w[i]['mode']
-        rowB += 1
-        #print(row)
+        if (w[i]['mode'] == 'ranked'):
+            sheet['C'+str(rowC)] = w[i]['hero']
+            rowC += 1
 
     for i in range(L):
-        sheet['C'+str(rowC)] = w[i]['hero']
-        rowC += 1 
-        #print(row)
-    
+        if (w[i]['mode'] == 'ranked'):
+            sheet['D'+str(rowD)] = w[i]['hero_deck']
+            rowD += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['E'+str(rowE)] = w[i]['opponent']
+            rowE += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['F'+str(rowF)] = w[i]['opponent_deck']
+            rowF += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['G'+str(rowG)] = w[i]['coin']
+            rowG += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['H'+str(rowH)] = w[i]['result']
+            rowH += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['I'+str(rowI)] = w[i]['rank']
+            rowI += 1
+
+    for i in range(L):
+        if (w[i]['mode'] == 'ranked'):
+            sheet['J'+str(rowJ)] = w[i]['added']
+            rowJ += 1
+
     wb.save('August_2016.xlsx')
 
     #Set rows to first empty row
